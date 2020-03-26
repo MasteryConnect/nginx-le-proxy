@@ -1,4 +1,4 @@
-nginx-le-proxy is a simple project to run the [nginx-proxy](https://github.com/nginx-proxy/nginx-proxy) container along with the [let's encrypt side car](https://github.com/nginx-proxy/docker-letsencrypt-nginx-proxy-companion) container.
+nginx-le-proxy is a simple project to run the [nginx-proxy](https://github.com/nginx-proxy/nginx-proxy) container along with the [let's encrypt sidecar](https://github.com/nginx-proxy/docker-letsencrypt-nginx-proxy-companion) container.
 
 ### motivation
 
