@@ -1,0 +1,46 @@
+version: '3'
+networks:
+  net:
+    driver: bridge
+
+services:
+
+  nginx:
+    image: jwilder/nginx-proxy:alpine
+    env_file: .env
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./nginx.conf:/etc/nginx/conf.d/nginx.conf
+      - vhostd:/etc/nginx/vhost.d
+      - ./default_location:/etc/nginx/vhost.d/default_location
+      - certs:/etc/nginx/certs
+      - html:/usr/share/nginx/html
+    networks:
+      - net
+    labels:
+      com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy: ""
+
+  nginx-le:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    env_file: .env
+    #environment:
+      # make sure to set the DEFAULT_EMAIL for let's encrypt
+      # either in the .env file or in a docker-compose.override.yml
+      #DEFAULT_EMAIL: "user@example.com"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - certs:/etc/nginx/certs
+      - vhostd:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+    links:
+      - nginx
+    networks:
+      - net
+
+volumes:
+  certs: {}
+  vhostd: {}
+  html: {}
