@@ -35,6 +35,7 @@ services:
       - certs:/etc/nginx/certs
       - vhostd:/etc/nginx/vhost.d
       - html:/usr/share/nginx/html
+      - ./acme.sh:/etc/acme.sh
     links:
       - nginx
     networks:
