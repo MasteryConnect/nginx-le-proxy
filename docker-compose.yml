@@ -6,7 +6,7 @@ networks:
 services:
 
   nginx:
-    image: jwilder/nginx-proxy:alpine
+    image: nginxproxy/nginx-proxy:alpine
     env_file: .env
     ports:
       - "80:80"
@@ -24,7 +24,7 @@ services:
       com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy: ""
 
   nginx-le:
-    image: jrcs/letsencrypt-nginx-proxy-companion
+    image: nginxproxy/acme-companion
     env_file: .env
     #environment:
       # make sure to set the DEFAULT_EMAIL for let's encrypt
